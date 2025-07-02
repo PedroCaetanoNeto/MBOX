@@ -1,0 +1,35 @@
+create table diretor(
+   id uuid not null primary key,
+   nome varchar(100) unique,
+   data_nascimento date not null,
+   nacionalidade varchar(50) not null,
+   data_cadastro timestamp,
+   data_atualizacao timestamp,
+   id_usuario uuid,
+
+);
+
+create table  filme(
+    id uuid not null primary key,
+	titulo varchar(35) not null,
+	sinopse varchar(300) not null,
+	data_lancamento date not null,
+	tipo varchar(30) not null,
+	nota numeric(18,2),
+	id_diretor uuid not null  references diretor(id),
+	data_cadastro timestamp,
+    data_atualizacao timestamp,
+    id_usuario uuid,
+
+	constraint chk_tipo check(tipo  in('TERROR','ANIMACAO','ACAO','AVENTURA','SUSPENSE','DRAMA','COMEDIA','ROMANCE'))
+
+);
+
+create table usuario(
+   id uuid not null primary key,
+   username varchar(100) unique,
+   comentario varchar(400),
+   data_cadastro timestamp,
+   data_atualizacao timestamp,
+   id_usuario uuid,
+);
